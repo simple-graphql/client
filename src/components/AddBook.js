@@ -35,7 +35,7 @@ const AddBook = () => {
 
   return (
 
-    <div>
+    <div id="form">
       <div className="field">
         <label htmlFor="">Book name:</label>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
