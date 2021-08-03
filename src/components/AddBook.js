@@ -1,4 +1,4 @@
-import {getAuthorsQuery, addBookMutation} from "../queries/queries";
+import {getAuthorsQuery, addBookMutation, getBooksQuery} from "../queries/queries";
 import {useState} from "react";
 import {useMutation, useQuery} from "@apollo/client";
 
@@ -24,7 +24,12 @@ const AddBook = () => {
         name,
         genre,
         authorId: authorID
-      }
+      },
+      refetchQueries: [getBooksQuery]
+    }).then(() => {
+      setName("")
+      setGenre("")
+      setAuthorID("-1")
     })
   }
 
@@ -42,7 +47,7 @@ const AddBook = () => {
       <div className="field">
         <label htmlFor="">Author:</label>
         <select value={authorID} onChange={(e) => setAuthorID(e.target.value)}>
-          <option disabled>Select Author</option>
+          <option disabled value={-1}>Select Author</option>
           {displayAuthors()}
         </select>
       </div>
