@@ -19,7 +19,13 @@ const AddBook = () => {
   }
 
   const submitForm = () => {
-    addBook()
+    addBook({
+      variables: {
+        name,
+        genre,
+        authorId: authorID
+      }
+    })
   }
 
   return (
