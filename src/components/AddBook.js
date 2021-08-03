@@ -1,14 +1,5 @@
-import {gql} from "@apollo/client";
 import {graphql} from "@apollo/client/react/hoc";
-
-const getAuthorsQuery = gql`
-  {
-    authors {
-      name
-      id
-    }
-  }
-`
+import {getAuthorsQuery} from "../queries/queries";
 
 const displayAuthors = (data) => {
   if (data.loading) {
