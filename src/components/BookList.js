@@ -1,5 +1,6 @@
 import {getBooksQuery} from "../queries/queries";
 import {useQuery} from "@apollo/client";
+import BookDetails from "./BookDetails";
 
 const BookList = () => {
   const {loading, error, data} = useQuery(getBooksQuery);
@@ -19,6 +20,7 @@ const BookList = () => {
       <ul id="book-list">
         {displayBooks()}
       </ul>
+      <BookDetails />
     </div>
   );
 }
