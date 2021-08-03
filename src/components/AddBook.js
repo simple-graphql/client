@@ -1,7 +1,11 @@
 import {graphql} from "@apollo/client/react/hoc";
 import {getAuthorsQuery} from "../queries/queries";
+import {useState} from "react";
 
 const AddBook = props => {
+  const [name, setName] = useState("");
+  const [genre, setGenre] = useState("");
+  const [authorID, setAuthorID] = useState("");
 
   const displayAuthors = () => {
     if (props.data.loading) {
@@ -12,27 +16,32 @@ const AddBook = props => {
     })
   }
 
+  const submitForm = () => {
+    console.log(name);
+    console.log(genre);
+    console.log(authorID);
+  }
+
   return (
 
-    <form id="add-book">
+    <div>
       <div className="field">
         <label htmlFor="">Book name:</label>
-        <input type="text"/>
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
       </div>
       <div className="field">
         <label htmlFor="">Genre:</label>
-        <input type="text"/>
+        <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)}/>
       </div>
       <div className="field">
         <label htmlFor="">Author:</label>
-        <select>
+        <select value={authorID} onChange={(e) => setAuthorID(e.target.value)}>
           <option disabled>Select Author</option>
           {displayAuthors()}
         </select>
       </div>
-      <button>+</button>
-    </form>
-
+      <button onClick={submitForm}>+</button>
+    </div>
   );
 }
 
