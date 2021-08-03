@@ -1,17 +1,17 @@
 import {graphql} from "@apollo/client/react/hoc";
 import {getAuthorsQuery} from "../queries/queries";
 
-const displayAuthors = (data) => {
-  if (data.loading) {
-    return (<option disabled>Loading Authors...</option>)
+const AddBook = props => {
+
+  const displayAuthors = () => {
+    if (props.data.loading) {
+      return (<option disabled>Loading Authors...</option>)
+    }
+    return props.data.authors.map(author => {
+      return (<option key={author.id} value={author.id}>{author.name}</option>)
+    })
   }
-  return data.authors.map(author => {
-    return (<option key={author.id} value={author.id}>{author.name}</option>)
-  })
-}
 
-
-const AddBook = (props) => {
   return (
 
     <form id="add-book">
@@ -27,7 +27,7 @@ const AddBook = (props) => {
         <label htmlFor="">Author:</label>
         <select>
           <option disabled>Select Author</option>
-          {displayAuthors(props.data)}
+          {displayAuthors()}
         </select>
       </div>
       <button>+</button>
