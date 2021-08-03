@@ -1,17 +1,18 @@
-import {graphql} from "@apollo/client/react/hoc";
 import {getAuthorsQuery} from "../queries/queries";
 import {useState} from "react";
+import {useQuery} from "@apollo/client";
 
-const AddBook = props => {
+const AddBook = () => {
+  const {loading, error, data} = useQuery(getAuthorsQuery);
   const [name, setName] = useState("");
   const [genre, setGenre] = useState("");
   const [authorID, setAuthorID] = useState("");
 
   const displayAuthors = () => {
-    if (props.data.loading) {
-      return (<option disabled>Loading Authors...</option>)
-    }
-    return props.data.authors.map(author => {
+    if (loading) return (<option disabled>Loading Authors...</option>)
+    if (error) return (<option disabled>Error fetching data...</option>)
+
+    return data.authors.map(author => {
       return (<option key={author.id} value={author.id}>{author.name}</option>)
     })
   }
@@ -45,4 +46,4 @@ const AddBook = props => {
   );
 }
 
-export default graphql(getAuthorsQuery)(AddBook);
+export default AddBook;
